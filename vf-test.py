@@ -18,7 +18,7 @@ payload = {
 headers = {
     "accept": "application/json",
     "content-type": "application/json",
-    "Authorization": ""
+    "Authorization": "VF.DM.65e5c101ad8fa15835b3b768.rwEjVSlwR7vf8PXn"
 }
 
 # Assuming you have already defined 'url', 'payload', and 'headers'
