@@ -1,19 +1,14 @@
 import requests
 
-url = "https://9e1f21c7-aded-4559-9c59-47cbcbc002e6-00-2jbfkmj4zy90.pike.replit.dev/query"  # Update with the correct URL if running on a different host
+url = "https://26370899-f56f-4f55-a300-05ea745cf312-00-1o2ao5xg8awr9.pike.replit.dev/weather"
 
-# Define the payload with the dynamic question
-payload = {
-    "question": "I am looking for lodges"
+# Define the query parameters
+params = {
+    "city": "London",
 }
 
-# Define the headers
-headers = {
-    "Content-Type": "application/json"
-}
-
-# Send the POST request
-response = requests.post(url, json=payload, headers=headers)
+# Send the GET request
+response = requests.get(url, params=params)
 
 # Print the response
 print(response.status_code)

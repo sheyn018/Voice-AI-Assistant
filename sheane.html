@@ -33,15 +33,15 @@
         text-decoration: none;
       "
     >
-     
+      Jannis Moore
     </a>
     <script>
       var vapiInstance = null;
       const assistant = {
-        name: "Lisa",
+        name: "Tool Test",
         voice: {
-          voiceId: "sarah",
-          provider: "11labs",
+          voiceId: "openai",
+          provider: "nova",
           stability: 0.5,
           similarityBoost: 0.75,
         },
@@ -51,59 +51,56 @@
             {
               role: "system",
               content:
-                "Lisa is a sophisticated AI web assistant, designed by Jannis Moore. Crafted with the persona of an experienced customer support professional in her early 30s, Lisa combines in-depth knowledge of the website's offerings with a keen sense of emotional intelligence. Her voice is clear, warm, and inviting, featuring a neutral accent to ensure accessibility for a broad user base. Lisa's primary role is to provide immediate, accurate answers to user inquiries about the Website Company, enhancing user experience and engagement.\n\nLisa's advanced programming enables her to handle a wide range of website-related questions, from basic navigation assistance to detailed explanations of services. She guides users through the website's content, offering instant feedback and support to improve their understanding and ease their journey through the site. Lisa ensures every user is met with patience, empathy, and professionalism, embodying the highest standards of customer care.\n\n**Major Mode of Interaction:** Lisa interacts primarily through text, adeptly processing written queries and responding promptly. This capability makes her an excellent resource for users seeking quick information or needing guidance on the website. Additionally, Lisa can utilize custom functions like \"WriteText\" and \"ChangeColor\" to interact with website elements directly, enhancing user interaction and providing a dynamic browsing experience.\n\n**Interaction Instructions:**\n\n-   Lisa encourages users to explore the website, acknowledging each query with confirmation of her engagement, e.g., \"Yes, I'm here. How can I assist you today?\"\n-   She emphasizes the importance of clear, empathetic communication, tailored to the context of each interaction.\n-   Lisa demonstrates how to clarify complex or vague user inquiries by asking concise questions for clarification, ensuring a smooth and efficient communication flow.\n-   She teaches users about website features and functionalities, ensuring they feel supported and informed at every step.\n-   Lisa can adapt the website's appearance through her interactive commands, improving accessibility and user satisfaction according to individual preferences.\n\nLisa's overarching mission is to enhance the user experience on the website, ensuring that every visitor can navigate and interact with the site effectively and pleasantly. She's not just an information provider but a dynamic interface designed to foster a deeper connection between the website and its users.",
+                "You are a pirate assistant.",
             },
           ],
           provider: "openai",
-          tools: [
+          "tools": [
           {
-          type: "function",
-          messages: [
-            {
-              type: "request-start",
-              content: "Checking the weather forecast. Please wait..."
-            },
-            {
-              type: "request-complete",
-              content: "The weather in city is"
-            },
-            {
-              type: "request-failed",
-              content: "I couldn't get the weather information right now."
-            },
-            {
-              type: "request-response-delayed",
-              content: "It appears there is some delay in communication with the weather API.",
-              timingMilliseconds: 2000
-            }
-          ],
-          function: {
-            name: "getWeather",
-            parameters: {
-              type: "object",
-              properties: {
-                city: {
-                  type: "string",
-                  description: "Name of a city"
-                }
-              },
-              required: ["city"]
-            },
-            description: "Retrieves the current weather for a specified city."
-          },
-          async: false,
-          server: {
-            url: "https://26370899-f56f-4f55-a300-05ea745cf312-00-1o2ao5xg8awr9.pike.replit.dev/weather"
-          }
+    "type": "function",
+    "messages": [
+        {
+            "type": "request-start",
+            "content": "Checking the weather forecast. Please wait..."
+        },
+        {
+            "type": "request-complete",
+            "content": "The weather in city is"
+        },
+        {
+            "type": "request-failed",
+            "content": "I couldn't get the weather information right now."
+        },
+        {
+            "type": "request-response-delayed",
+            "content": "It appears there is some delay in communication with the weather API.",
+            "timingMilliseconds": 2000
         }
-           
-          ],
+    ],
+    "function": {
+        "name": "getWeather",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "city": {
+                    "type": "string"
+                }
+            }
+        },
+        "description": "Retrieves the current weather for a specified city."
+    },
+    "async": false,
+    "server": {
+        "url": "https://26370899-f56f-4f55-a300-05ea745cf312-00-1o2ao5xg8awr9.pike.replit.dev/weather"
+    }
+}
+      ],
           maxTokens: 250,
           temperature: 0.7,
           emotionRecognitionEnabled: true,
         },
         recordingEnabled: true,
-        firstMessage: "Hello, this is Jannis. How may I assist you today?",
+        firstMessage: "Hello, this is Sheane. How may I assist you today?",
         voicemailMessage:
           "You've reached our voicemail. Please leave a message after the beep, and we'll get back to you as soon as possible.",
         endCallFunctionEnabled: false,
@@ -177,7 +174,7 @@
         g.onload = function () {
           vapiInstance = window.vapiSDK.run({
             apiKey: '8d12f352-c7ed-466d-8e9b-fdcc41452a05', // mandatory
-            assistant: assistant, // mandatory
+            assistant: asssitant, // mandatory
             config: buttonConfig, // optional
           });
 
