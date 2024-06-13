@@ -46,7 +46,7 @@
           similarityBoost: 0.75,
         },
         model: {
-          model: "gpt-4o",
+          model: "gpt-4-turbo",
           messages: [
             {
               role: "system",
@@ -57,46 +57,77 @@
           provider: "openai",
           tools: [
           {
-          type: "function",
-          messages: [
-            {
-              type: "request-start",
-              content: "Checking the weather forecast. Please wait..."
-            },
-            {
-              type: "request-complete",
-              content: "The weather in city is"
-            },
-            {
-              type: "request-failed",
-              content: "I couldn't get the weather information right now."
-            },
-            {
-              type: "request-response-delayed",
-              content: "It appears there is some delay in communication with the weather API.",
-              timingMilliseconds: 2000
-            }
-          ],
-          function: {
-            name: "getWeather",
-            parameters: {
-              type: "object",
-              properties: {
-                city: {
-                  type: "string",
-                  description: "Name of a city"
-                }
+            type: "function",
+            messages: [
+              {
+                type: "request-start",
+                content: "Checking the weather forecast. Please wait..."
               },
-              required: ["city"]
+              {
+                type: "request-failed",
+                content: "I couldn't get the weather information right now."
+              },
+              {
+                type: "request-response-delayed",
+                content: "It appears there is some delay in communication with the weather API.",
+                timingMilliseconds: 2000
+              }
+            ],
+            function: {
+              name: "getWeather",
+              parameters: {
+                type: "object",
+                properties: {
+                  city: {
+                    type: "string",
+                    description: "Name of a city"
+                  }
+                },
+                required: ["city"]
+              },
+              description: "Retrieves the current weather for a specified city. Verbalize the response from this tool to the user immediately one the request is complete.",
             },
-            description: "Retrieves the current weather for a specified city."
-          },
-          async: false,
-          server: {
-            url: "https://26370899-f56f-4f55-a300-05ea745cf312-00-1o2ao5xg8awr9.pike.replit.dev/weather"
-          }
+            async: false,
+            server: {
+              url: "https://26370899-f56f-4f55-a300-05ea745cf312-00-1o2ao5xg8awr9.pike.replit.dev/weather"
+            }
+        },
+        {
+            type: "function",
+            messages: [
+              {
+                type: "request-start",
+                content: "Okay taking note of that."
+              },
+              {
+                type: "request-failed",
+                content: "I'm sorry couln't process that could you please repeat it."
+              },
+              {
+                type: "request-response-delayed",
+                content: "It appears there is some delay in communication with the booking API.",
+                timingMilliseconds: 2000
+              }
+            ],
+            function: {
+              name: "makeBooking",
+              parameters: {
+                type: "object",
+                properties: {
+                  question: {
+                    type: "string",
+                    description: "Question/query of the user. Make sure to send exactly what the user says, and do not change anything!"
+                  }
+                },
+                required: ["question"]
+              },
+              description: "Use this tool when the user says they want to book a site. Once you this tool is called, it should called for every query of the user, especially when they are in the booking process! This asks the user the needed details for booking and gives them the list of available sites.",
+            },
+            async: false,
+            server: {
+              url: "https://f28321e4-e0ce-4f81-a21d-f20ec849b8ce-00-3b8871pd4i0zb.sisko.replit.dev/query"
+            }
         }
-           
           ],
           maxTokens: 250,
           temperature: 0.7,
@@ -176,7 +207,7 @@
 
         g.onload = function () {
           vapiInstance = window.vapiSDK.run({
-            apiKey: '8d12f352-c7ed-466d-8e9b-fdcc41452a05', // mandatory
+            apiKey: 'c388268b-37e7-41d0-8846-51e7a891e744', // mandatory
             assistant: assistant, // mandatory
             config: buttonConfig, // optional
           });
